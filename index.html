@@ -1,184 +1,248 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>NOX CRU | Luxury Chrome Designer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOX CRU | Futuristic Chrome Studio</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Poppins', sans-serif;
-        }
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-        body{
-            background: radial-gradient(circle at top, #1a1a1a, #000000);
-            color:white;
-            overflow-x:hidden;
-        }
+body{
+background:#050505;
+color:white;
+font-family:'Poppins',sans-serif;
+overflow-x:hidden;
+}
 
-        header{
-            height:100vh;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            padding:20px;
-        }
+/* NAVBAR */
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+z-index:999;
+}
 
-        h1{
-            font-size:65px;
-            font-weight:800;
-            background:linear-gradient(90deg,#c0c0c0,#ffffff,#c0c0c0);
-            -webkit-background-clip:text;
-            color:transparent;
-            animation:glow 3s infinite alternate;
-        }
+nav h2{
+font-family:'Orbitron',sans-serif;
+letter-spacing:2px;
+font-size:18px;
+}
 
-        @keyframes glow{
-            from{ text-shadow:0 0 10px #aaa; }
-            to{ text-shadow:0 0 30px #ffffff; }
-        }
+nav a{
+color:white;
+text-decoration:none;
+font-size:14px;
+opacity:0.8;
+}
 
-        .tagline{
-            margin-top:20px;
-            max-width:600px;
-            opacity:0.8;
-            font-size:18px;
-        }
+/* HERO */
+header{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
 
-        .buttons{
-            margin-top:35px;
-        }
+.hero-title{
+font-family:'Orbitron',sans-serif;
+font-size:48px;
+background:linear-gradient(90deg,#aaa,#fff,#aaa);
+-webkit-background-clip:text;
+color:transparent;
+text-shadow:0 0 25px rgba(255,255,255,0.4);
+}
 
-        .btn{
-            padding:14px 35px;
-            border-radius:50px;
-            text-decoration:none;
-            font-weight:600;
-            margin:10px;
-            transition:0.3s;
-            display:inline-block;
-        }
+.typing{
+margin-top:15px;
+font-size:16px;
+opacity:0.8;
+min-height:24px;
+}
 
-        .insta{
-            background:linear-gradient(90deg,#c0c0c0,#ffffff);
-            color:black;
-        }
+.btn{
+margin-top:25px;
+padding:12px 30px;
+border-radius:40px;
+border:1px solid silver;
+background:transparent;
+color:white;
+text-decoration:none;
+transition:0.3s;
+display:inline-block;
+}
 
-        .whatsapp{
-            background:#25D366;
-            color:white;
-        }
+.btn:hover{
+background:white;
+color:black;
+box-shadow:0 0 25px white;
+}
 
-        .btn:hover{
-            transform:scale(1.1);
-            box-shadow:0 0 20px silver;
-        }
+/* GLASS CARDS */
+section{
+padding:80px 20px;
+text-align:center;
+}
 
-        section{
-            padding:80px 20px;
-            text-align:center;
-        }
+h3{
+font-family:'Orbitron',sans-serif;
+margin-bottom:40px;
+font-size:26px;
+}
 
-        h2{
-            font-size:40px;
-            margin-bottom:50px;
-            opacity:0;
-            transform:translateY(40px);
-            transition:1s;
-        }
+.grid{
+display:grid;
+grid-template-columns:1fr;
+gap:20px;
+}
 
-        .gallery{
-            display:flex;
-            flex-wrap:wrap;
-            justify-content:center;
-        }
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(12px);
+padding:25px;
+border-radius:20px;
+transition:0.3s;
+}
 
-        .gallery img{
-            width:280px;
-            margin:15px;
-            border-radius:20px;
-            transition:0.4s;
-            box-shadow:0 0 15px #111;
-            opacity:0;
-            transform:translateY(40px);
-        }
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 30px rgba(255,255,255,0.2);
+}
 
-        .gallery img:hover{
-            transform:scale(1.1);
-            box-shadow:0 0 25px silver;
-        }
+.gallery img{
+width:100%;
+border-radius:15px;
+}
 
-        footer{
-            padding:30px;
-            background:#0a0a0a;
-            text-align:center;
-            opacity:0.6;
-        }
+/* Floating WA */
+.float{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+padding:14px 18px;
+border-radius:50px;
+color:white;
+text-decoration:none;
+font-size:14px;
+box-shadow:0 0 20px #25D366;
+}
 
-        /* Scroll animation active class */
-        .show{
-            opacity:1 !important;
-            transform:translateY(0) !important;
-        }
-    </style>
+/* Desktop Upgrade */
+@media(min-width:768px){
+
+.hero-title{
+font-size:80px;
+}
+
+.grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+</style>
 </head>
+
 <body>
 
+<nav>
+<h2>NOX CRU</h2>
+<a href="#pricing">Pricing</a>
+</nav>
+
 <header>
-    <h1>NOX CRU</h1>
+<h1 class="hero-title">NOX CRU</h1>
+<div class="typing" id="typing"></div>
 
-    <p class="tagline">
-        Premium Chrome & 3D Typography Designer crafting bold metallic text
-        visuals for gamers, brands & creators worldwide.
-        I turn names into power.
-    </p>
-
-    <div class="buttons">
-        <a class="btn insta" href="https://instagram.com/noxcru" target="_blank">
-            DM on Instagram
-        </a>
-
-        <a class="btn whatsapp" href="https://wa.me/917559964232" target="_blank">
-            Order on WhatsApp
-        </a>
-    </div>
+<a class="btn" href="https://instagram.com/noxcru" target="_blank">
+DM On Instagram
+</a>
 </header>
 
 <section>
-    <h2 class="reveal">My Chrome Collection</h2>
+<h3>Chrome Collection</h3>
 
-    <div class="gallery">
-        <img class="reveal" src="file_0000000097fc71fa8252d7a992fe6cd7.png">
-        <img class="reveal" src="file_00000000a5b87206b96d571906f84d41.png">
-        <img class="reveal" src="file_00000000a50c71fa8b393e3d16b350b2.png">
-    </div>
+<div class="grid gallery">
+<div class="card">
+<img src="file_0000000097fc71fa8252d7a992fe6cd7.png">
+</div>
+
+<div class="card">
+<img src="file_00000000a5b87206b96d571906f84d41.png">
+</div>
+
+<div class="card">
+<img src="file_00000000a50c71fa8b393e3d16b350b2.png">
+</div>
+</div>
 </section>
 
-<footer>
-    © 2026 NOX CRU | Luxury Chrome Typography
+<section id="pricing">
+<h3>Pricing</h3>
+
+<div class="grid">
+<div class="card">
+<h4>Basic</h4>
+<p>Clean Chrome Text</p>
+<p>₹299</p>
+</div>
+
+<div class="card">
+<h4>Premium</h4>
+<p>3D + Lighting Effects</p>
+<p>₹599</p>
+</div>
+
+<div class="card">
+<h4>Ultimate</h4>
+<p>Luxury Custom Identity</p>
+<p>₹999</p>
+</div>
+</div>
+</section>
+
+<section>
+<h3>About</h3>
+<div class="card">
+NOX CRU is a futuristic chrome typography studio crafting powerful digital identities for gamers, brands & creators.
+</div>
+</section>
+
+<footer style="padding:40px;text-align:center;opacity:0.6;">
+© 2026 NOX CRU — Futuristic Chrome Studio
 </footer>
 
+<a class="float" href="https://wa.me/917559964232" target="_blank">
+WhatsApp
+</a>
+
 <script>
-    // Scroll reveal animation
-    const reveals = document.querySelectorAll(".reveal");
-
-    window.addEventListener("scroll", () => {
-        reveals.forEach(element => {
-            const windowHeight = window.innerHeight;
-            const elementTop = element.getBoundingClientRect().top;
-
-            if(elementTop < windowHeight - 100){
-                element.classList.add("show");
-            }
-        });
-    });
+/* Typing Effect */
+const text = "Premium Chrome & 3D Typography Studio";
+let i = 0;
+function typing(){
+if(i < text.length){
+document.getElementById("typing").innerHTML += text.charAt(i);
+i++;
+setTimeout(typing,50);
+}
+}
+typing();
 </script>
 
 </body>
