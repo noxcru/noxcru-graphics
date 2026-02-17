@@ -114,10 +114,15 @@ gap:20px;
 background:rgba(255,255,255,0.05);
 border:1px solid rgba(255,255,255,0.1);
 backdrop-filter:blur(12px);
-padding:25px;
+padding:15px;
 border-radius:20px;
 transition:0.3s;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
 }
+
 
 .card:hover{
 transform:translateY(-8px);
@@ -126,8 +131,17 @@ box-shadow:0 0 30px rgba(255,255,255,0.2);
 
 .gallery img{
 width:100%;
+height:300px;      /* SAME HEIGHT FOR ALL */
+object-fit:cover;  /* Crops nicely without stretching */
 border-radius:15px;
 }
+
+.gallery img{
+width:100%;
+aspect-ratio:1/1;
+object-fit:cover;
+}
+
 
 /* Floating WA */
 .float{
