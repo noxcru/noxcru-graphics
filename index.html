@@ -16,14 +16,11 @@ font-family:'Poppins',sans-serif;
 overflow-x:hidden;
 }
 
-/* NAVBAR */
+/* NAV */
 nav{
 position:fixed;
 top:0;
 width:100%;
-display:flex;
-justify-content:space-between;
-align-items:center;
 padding:15px 20px;
 background:rgba(0,0,0,0.6);
 backdrop-filter:blur(15px);
@@ -33,7 +30,6 @@ z-index:999;
 nav h2{
 font-family:'Orbitron';
 letter-spacing:3px;
-font-size:18px;
 }
 
 /* HERO */
@@ -47,19 +43,21 @@ text-align:center;
 padding:20px;
 }
 
+.typing{
+font-size:14px;
+letter-spacing:2px;
+opacity:0.8;
+margin-bottom:10px;
+min-height:20px;
+}
+
 .hero-title{
 font-family:'Orbitron';
-font-size:60px;
+font-size:70px;
 background:linear-gradient(90deg,#aaa,#fff,#aaa);
 -webkit-background-clip:text;
 color:transparent;
 text-shadow:0 0 30px rgba(255,255,255,0.6);
-animation:shine 3s infinite linear;
-}
-
-@keyframes shine{
-0%{background-position:-200px;}
-100%{background-position:200px;}
 }
 
 .btn{
@@ -90,32 +88,56 @@ font-family:'Orbitron';
 margin-bottom:40px;
 }
 
-/* GALLERY */
-.gallery-wrapper{
-overflow:hidden;
-position:relative;
-}
-
-.gallery-track{
+/* FILTER BUTTONS */
+.filters{
+margin-bottom:40px;
 display:flex;
-transition:transform 0.6s cubic-bezier(.77,0,.18,1);
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
 }
 
-.page{
-min-width:100%;
+.filters button{
+background:transparent;
+border:1px solid silver;
+color:white;
+padding:8px 16px;
+border-radius:30px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.filters button.active,
+.filters button:hover{
+background:white;
+color:black;
+}
+
+/* GALLERY */
+.gallery{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
 gap:20px;
 }
 
 .card{
 position:relative;
-background:rgba(255,255,255,0.05);
 border-radius:20px;
 overflow:hidden;
-padding:10px;
 transition:0.4s;
-border:1px solid rgba(255,255,255,0.1);
+transform-style:preserve-3d;
+}
+
+.card img{
+width:100%;
+aspect-ratio:1/1;
+object-fit:cover;
+border-radius:20px;
+transition:0.5s;
+}
+
+.card:hover{
+transform:rotateY(8deg) rotateX(8deg) scale(1.05);
 }
 
 .card::before{
@@ -128,52 +150,15 @@ background:linear-gradient(45deg,#fff,#777,#fff);
 -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
 -webkit-mask-composite:xor;
 mask-composite:exclude;
-animation:borderGlow 3s linear infinite;
+animation:borderGlow 4s linear infinite;
 }
 
 @keyframes borderGlow{
-0%{filter:blur(2px);}
-50%{filter:blur(6px);}
-100%{filter:blur(2px);}
+0%{filter:hue-rotate(0deg);}
+100%{filter:hue-rotate(360deg);}
 }
 
-.card img{
-width:100%;
-aspect-ratio:1/1;
-object-fit:cover;
-border-radius:15px;
-transition:0.5s;
-}
-
-.card:hover{
-transform:scale(1.05);
-}
-
-/* PAGINATION */
-.pagination{
-margin-top:40px;
-display:flex;
-justify-content:center;
-gap:15px;
-}
-
-.pagination span{
-cursor:pointer;
-padding:10px 18px;
-border-radius:50px;
-border:1px solid silver;
-transition:0.3s;
-font-family:'Orbitron';
-}
-
-.pagination span.active,
-.pagination span:hover{
-background:white;
-color:black;
-box-shadow:0 0 20px white;
-}
-
-/* WHATSAPP FLOAT */
+/* FLOAT WA */
 .float{
 position:fixed;
 bottom:20px;
@@ -183,16 +168,13 @@ padding:14px 18px;
 border-radius:50px;
 color:white;
 text-decoration:none;
-font-size:14px;
 box-shadow:0 0 20px #25D366;
 }
 
 /* DESKTOP */
 @media(min-width:768px){
-.page{
-grid-template-columns:repeat(4,1fr);
-}
-.hero-title{font-size:90px;}
+.hero-title{font-size:100px;}
+.gallery{grid-template-columns:repeat(4,1fr);}
 }
 </style>
 </head>
@@ -204,6 +186,7 @@ grid-template-columns:repeat(4,1fr);
 </nav>
 
 <header>
+<div class="typing" id="typing"></div>
 <h1 class="hero-title">NOX CRU</h1>
 <a class="btn" href="https://instagram.com/noxcru" target="_blank">
 DM ON INSTAGRAM
@@ -213,31 +196,23 @@ DM ON INSTAGRAM
 <section>
 <h3>Chrome Collection</h3>
 
-<div class="gallery-wrapper">
-<div class="gallery-track" id="track">
-
-<!-- PAGE 1 -->
-<div class="page">
-<div class="card"><img src="file_0000000097fc71fa8252d7a992fe6cd7.png"></div>
-<div class="card"><img src="file_00000000a5b87206b96d571906f84d41.png"></div>
-<div class="card"><img src="file_00000000a50c71fa8b393e3d16b350b2.png"></div>
-<div class="card"><img src="Picsart_26-02-17_22-05-25-752.png"></div>
+<div class="filters">
+<button class="active" onclick="filterSelection('all')">All</button>
+<button onclick="filterSelection('chrome')">Chrome</button>
+<button onclick="filterSelection('fire')">Fire</button>
+<button onclick="filterSelection('ice')">Ice</button>
 </div>
 
-<!-- PAGE 2 -->
-<div class="page">
-<div class="card"><img src="file_00000000ab2071fa84ec9d27e1e6a4f5.png"></div>
-<div class="card"><img src="file_00000000ea307209a29ae82c194d611d.png"></div>
-</div>
+<div class="gallery" id="gallery">
+
+<div class="card chrome"><img src="file_0000000097fc71fa8252d7a992fe6cd7.png"></div>
+<div class="card chrome"><img src="file_00000000a5b87206b96d571906f84d41.png"></div>
+<div class="card fire"><img src="file_00000000a50c71fa8b393e3d16b350b2.png"></div>
+<div class="card ice"><img src="Picsart_26-02-17_22-05-25-752.png"></div>
+<div class="card chrome"><img src="file_00000000ab2071fa84ec9d27e1e6a4f5.png"></div>
+<div class="card fire"><img src="file_00000000ea307209a29ae82c194d611d.png"></div>
 
 </div>
-</div>
-
-<div class="pagination">
-<span class="active" onclick="goToPage(0)">1</span>
-<span onclick="goToPage(1)">2</span>
-</div>
-
 </section>
 
 <a class="float" href="https://wa.me/917559964232" target="_blank">
@@ -245,31 +220,31 @@ WhatsApp
 </a>
 
 <script>
-const track = document.getElementById('track');
-const pages = document.querySelectorAll('.page');
-const buttons = document.querySelectorAll('.pagination span');
+/* Typing Effect */
+const text="Premium Chrome & 3D Typography Studio";
+let i=0;
+function typing(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,40);
+}}
+typing();
 
-function goToPage(index){
-track.style.transform = `translateX(-${index * 100}%)`;
-buttons.forEach(btn=>btn.classList.remove('active'));
-buttons[index].classList.add('active');
+/* Filter */
+function filterSelection(category){
+let cards=document.querySelectorAll(".card");
+document.querySelectorAll(".filters button").forEach(btn=>btn.classList.remove("active"));
+event.target.classList.add("active");
+
+cards.forEach(card=>{
+if(category==="all"){
+card.style.display="block";
+}else{
+card.style.display=card.classList.contains(category)?"block":"none";
 }
-
-/* Swipe Support */
-let startX = 0;
-track.addEventListener('touchstart', e=>{
-startX = e.touches[0].clientX;
 });
-
-track.addEventListener('touchend', e=>{
-let endX = e.changedTouches[0].clientX;
-if(startX - endX > 50){
-goToPage(1);
 }
-if(endX - startX > 50){
-goToPage(0);
-}
-});
 </script>
 
 </body>
