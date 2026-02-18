@@ -1,323 +1,199 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NOXCRU Elite</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 
 body{
 font-family:Arial, sans-serif;
-background:linear-gradient(to bottom,#000 0%,#000 60%,#001018 100%);
+background:#000;
 color:white;
 overflow-x:hidden;
-transition:background 0.3s ease;
 }
 
-/* ===== Scroll Blue Fade ===== */
-body.scrolled{
-background:linear-gradient(to bottom,#000 0%,#000 40%,#002b45 100%);
-}
-  
-/* ===== Pricing Section ===== */
-
-.pricing{
-padding:80px 20px;
-max-width:1200px;
-margin:auto;
-text-align:center;
-}
-
-.pricing h2{
-font-size:38px;
-margin-bottom:50px;
-letter-spacing:4px;
-color:#ffffff;
-}
-
-.pricing-grid{
-display:grid;
-grid-template-columns:1fr;
-gap:30px;
-}
-
-.price-card{
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:20px;
-padding:40px 25px;
-transition:0.4s;
-backdrop-filter:blur(8px);
-position:relative;
-}
-
-.price-card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 25px rgba(255,255,255,0.15);
-}
-
-.price-card h3{
-font-size:22px;
-letter-spacing:3px;
-margin-bottom:20px;
-}
-
-.price{
-font-size:40px;
-font-weight:800;
-margin-bottom:25px;
-color:#ffffff;
-}
-
-.price span{
-font-size:14px;
-opacity:0.6;
-}
-
-.features{
-list-style:none;
-margin-bottom:30px;
-}
-
-.features li{
-margin:12px 0;
-opacity:0.85;
-}
-
-.buy-btn{
-display:inline-block;
-padding:12px 28px;
-border-radius:30px;
-background:white;
-color:black;
-font-weight:600;
-text-decoration:none;
-transition:0.3s;
-}
-
-.buy-btn:hover{
-background:#e5e5e5;
-}
-
-/* Highlight Premium */
-.popular{
-border:1px solid white;
-box-shadow:0 0 30px rgba(255,255,255,0.2);
-}
-
-.popular::before{
-content:"MOST POPULAR";
-position:absolute;
-top:-12px;
-left:50%;
-transform:translateX(-50%);
-background:white;
-color:black;
-padding:4px 14px;
-font-size:10px;
-border-radius:20px;
-letter-spacing:2px;
-}
-
-/* Desktop Layout */
-@media(min-width:900px){
-.pricing-grid{
-grid-template-columns:repeat(3,1fr);
-}
+/* ===== Animated Background Particles ===== */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
 }
 
 /* ===== Header ===== */
 header{
-padding:80px 20px 60px;
 text-align:center;
-position:sticky;
-top:0;
-z-index:10;
-transition:all 0.5s ease;
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(10px);
-}
-
-header.scrolled{
-background:rgba(0,0,0,0.9);
-backdrop-filter:blur(0px);
-padding:40px 20px 30px;
+padding:90px 20px 50px;
 }
 
 h1{
-font-size:56px;
-font-weight:900;
-letter-spacing:6px;
-background:linear-gradient(120deg,#ffffff,#bde6ff,#ffffff);
--webkit-background-clip:text;
-color:transparent;
-text-shadow:0 0 35px rgba(0,200,255,0.5);
-transition:all 0.5s ease;
+font-size:clamp(42px,8vw,80px);
+letter-spacing:8px;
+color:white;
+animation:neon 2s infinite alternate;
 }
 
-header.scrolled h1{
-font-size:36px;
-text-shadow:0 0 5px rgba(0,200,255,0.2);
+@keyframes neon{
+from{
+text-shadow:0 0 5px #fff,
+0 0 15px #00eaff,
+0 0 30px #00eaff;
+}
+to{
+text-shadow:0 0 15px #fff,
+0 0 35px #00eaff,
+0 0 70px #00eaff;
+}
 }
 
 header p{
-margin-top:20px;
-font-size:14px;
-letter-spacing:4px;
-color:#9fdfff;
-opacity:0.8;
-transition:all 0.5s ease;
+margin-top:15px;
+font-size:13px;
+letter-spacing:3px;
+color:#aaa;
 }
 
-header.scrolled p{
-opacity:0.4;
-letter-spacing:2px;
-}
-
-
-/* ===== Portfolio Section ===== */
+/* ===== Portfolio ===== */
 .portfolio{
-padding:50px 15px;
 max-width:1200px;
 margin:auto;
+padding:30px 15px;
 }
 
-/* ===== Filters ===== */
+/* Filters */
 .filters{
 text-align:center;
 margin-bottom:30px;
 }
 
 .filters button{
-padding:10px 22px;
-margin:6px;
+padding:10px 18px;
+margin:5px;
 border-radius:30px;
-border:1px solid #333;
+border:1px solid #222;
 background:#111;
 color:white;
 cursor:pointer;
 transition:0.3s;
+font-size:14px;
 }
 
+.filters button.active,
 .filters button:hover{
-background:linear-gradient(90deg,#66ccff,#ffffff,#66ccff);
+background:white;
 color:black;
-box-shadow:0 0 15px rgba(0,200,255,0.6);
 }
 
-/* ===== Gallery Grid ===== */
+/* Gallery */
 .gallery{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:20px;
-opacity:1;
-transition:opacity 0.4s ease;
+gap:15px;
 }
 
-.card{
-perspective:1000px;
-}
-
-.card img{
-width:100%;
-border-radius:20px;
-transition:0.4s;
-box-shadow:0 0 20px rgba(0,200,255,0.2);
-}
-
-.card:hover img{
-transform:rotateY(8deg) scale(1.05);
-box-shadow:0 0 30px rgba(0,200,255,0.6);
-}
-
-/* Desktop */
 @media(min-width:900px){
 .gallery{
 grid-template-columns:repeat(4,1fr);
 }
 }
 
-/* ===== Pagination ===== */
+.card{
+overflow:hidden;
+border-radius:15px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(8px);
+transition:0.4s;
+}
+
+.card img{
+width:100%;
+display:block;
+transition:0.4s;
+}
+
+.card:hover img{
+transform:scale(1.08);
+box-shadow:0 0 20px #00eaff;
+}
+
+/* Pagination */
 .pagination{
 text-align:center;
-margin-top:35px;
+margin-top:25px;
 }
 
 .page{
 display:inline-block;
 margin:6px;
-padding:10px 16px;
+padding:8px 14px;
 border-radius:50%;
 background:#111;
 border:1px solid #333;
 cursor:pointer;
-transition:0.3s;
+font-size:14px;
 }
 
 .page.active{
-background:linear-gradient(90deg,#66ccff,#ffffff,#66ccff);
+background:white;
 color:black;
-box-shadow:0 0 18px rgba(0,200,255,0.8);
 }
-<section class="pricing">
 
-<h2>PRICING PLANS</h2>
+/* Contact */
+.contact{
+text-align:center;
+padding:60px 20px;
+font-size:18px;
+}
 
-<div class="pricing-grid">
+.contact a{
+color:#00eaff;
+text-decoration:none;
+font-weight:bold;
+}
 
-<div class="price-card">
-<h3>STANDARD</h3>
-<div class="price">₹99 <span>/ project</span></div>
-<ul class="features">
-<li>✔ 1 Custom Chrome Text</li>
-<li>✔ Basic 3D Style</li>
-<li>✔ 2 Revisions</li>
-<li>✔ 3 Day Delivery</li>
-</ul>
-<a href="#" class="buy-btn">ORDER NOW</a>
-</div>
+/* Floating Instagram */
+.floating{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#E1306C;
+width:55px;
+height:55px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+cursor:pointer;
+box-shadow:0 0 20px rgba(225,48,108,0.7);
+animation:float 2s infinite;
+z-index:10;
+}
 
-<div class="price-card popular">
-<h3>ELITE</h3>
-<div class="price">₹199 <span>/ project</span></div>
-<ul class="features">
-<li>✔ Advanced 3D Chrome</li>
-<li>✔ Custom Lighting Effects</li>
-<li>✔ 5 Revisions</li>
-<li>✔ 2 Day Delivery</li>
-</ul>
-<a href="#" class="buy-btn">ORDER NOW</a>
-</div>
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-7px);}
+100%{transform:translateY(0);}
+}
 
-<div class="price-card">
-<h3>PREMIUM</h3>
-<div class="price">₹229 <span>/ project</span></div>
-<ul class="features">
-<li>✔ Ultra Realistic 3D Design</li>
-<li>✔ Custom Text + Background</li>
-<li>✔ Unlimited Revisions</li>
-<li>✔ 1 Day Priority Delivery</li>
-</ul>
-<a href="#" class="buy-btn">ORDER NOW</a>
-</div>
-
-</div>
-</section>
-
-/* ===== Footer ===== */
 footer{
 text-align:center;
-padding:40px;
-margin-top:60px;
+padding:30px;
 background:#050505;
+color:#666;
+margin-top:40px;
 font-size:14px;
-color:#777;
 }
 </style>
 </head>
 
 <body>
+
+<canvas id="particles"></canvas>
 
 <header>
 <h1>NOXCRU</h1>
@@ -327,10 +203,10 @@ color:#777;
 <section class="portfolio">
 
 <div class="filters">
-<button onclick="filterImages('all')">All</button>
-<button onclick="filterImages('chrome')">Chrome</button>
-<button onclick="filterImages('fire')">Fire</button>
-<button onclick="filterImages('ice')">Ice</button>
+<button onclick="filterImages('all',this)" class="active">All</button>
+<button onclick="filterImages('chrome',this)">Chrome</button>
+<button onclick="filterImages('fire',this)">Fire</button>
+<button onclick="filterImages('ice',this)">Ice</button>
 </div>
 
 <div class="gallery" id="gallery"></div>
@@ -338,26 +214,30 @@ color:#777;
 
 </section>
 
+<section class="contact">
+DM me on Instagram for pricing →
+<a href="https://instagram.com/noxcru" target="_blank">@noxcru</a>
+</section>
+
+<div class="floating" onclick="window.open('https://instagram.com/noxcru','_blank')">
+📩
+</div>
+
 <footer>
 © 2026 NOXCRU | ELITE MODE
 </footer>
 
 <script>
-const images = [
-{src:"Picsart_26-02-17_22-11-50-981.png",category:"chrome"},
-{src:"file_000000000eb47209b39708c9d21f9f04.png",category:"chrome"},
-{src:"Picsart_26-02-17_22-05-25-752.png",category:"fire"},
-{src:"Picsart_26-02-17_22-19-12-252.png",category:"fire"},
-{src:"Picsart_26-02-17_22-13-48-212.png",category:"ice"},
-{src:"Picsart_26-02-17_22-24-33-659.png",category:"ice"},
-{src:"file_000000007e647243a5ecf8bb4c290588.png",category:"chrome"},
-{src:"file_00000000d93c71fa8b8eb1dfbdf435b5.png",category:"fire"},
-{src:"file_00000000a50c71fa8b393e3d16b350b2.png",category:"ice"},
-{src:"file_0000000097fc71fa8252d7a992fe6cd7.png",category:"chrome"},
-{src:"file_00000000ea307209a29ae82c194d611d.png",category:"fire"},
-{src:"file_00000000c53472098fea9588c184e6ed.png",category:"ice"},
-{src:"file_00000000a5b87206b96d571906f84d41.png",category:"chrome"},
-{src:"file_00000000ab2071fa84ec9d27e1e6a4f5.png",category:"fire"},
+/* ===== Images ===== */
+const images=[
+{src:"1.png",category:"chrome"},
+{src:"2.png",category:"chrome"},
+{src:"3.png",category:"fire"},
+{src:"4.png",category:"fire"},
+{src:"5.png",category:"ice"},
+{src:"6.png",category:"ice"},
+{src:"7.png",category:"chrome"},
+{src:"8.png",category:"fire"},
 ];
 
 let filtered=[...images];
@@ -368,21 +248,16 @@ const gallery=document.getElementById("gallery");
 const pagination=document.getElementById("pagination");
 
 function render(){
-gallery.style.opacity=0;
-setTimeout(()=>{
 gallery.innerHTML="";
 const start=currentPage*perPage;
-const end=start+perPage;
-const pageItems=filtered.slice(start,end);
+const pageItems=filtered.slice(start,start+perPage);
 
 pageItems.forEach(item=>{
 gallery.innerHTML+=`
 <div class="card">
-<img src="${item.src}">
+<img src="${item.src}" loading="lazy">
 </div>`;
 });
-gallery.style.opacity=1;
-},200);
 
 updatePagination();
 }
@@ -401,29 +276,52 @@ currentPage=page;
 render();
 }
 
-function filterImages(cat){
+function filterImages(cat,btn){
+document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+
 currentPage=0;
-if(cat==="all"){
-filtered=[...images];
-}else{
-filtered=images.filter(img=>img.category===cat);
-}
+filtered=cat==="all"?[...images]:images.filter(img=>img.category===cat);
 render();
 }
 
-/* Scroll effect */
-window.addEventListener("scroll",()=>{
-if(window.scrollY > 120){
-document.body.classList.add("scrolled");
-document.querySelector("header").classList.add("scrolled");
-}else{
-document.body.classList.remove("scrolled");
-document.querySelector("header").classList.remove("scrolled");
-}
+render();
+
+/* ===== Particle Background ===== */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<60;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2,
+speed:Math.random()*0.5+0.2
 });
+}
 
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="rgba(0,255,255,0.5)";
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+ctx.fill();
+p.y+=p.speed;
+if(p.y>canvas.height)p.y=0;
+});
+requestAnimationFrame(animate);
+}
+animate();
 
-render();
+window.addEventListener("resize",()=>{
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+});
 </script>
 
 </body>
