@@ -2,249 +2,264 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOX CRU | Futuristic Chrome Studio</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<title>NOX CRU Ultra</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-background:#050505;
+font-family:Arial, sans-serif;
+background:#000;
 color:white;
-font-family:'Poppins',sans-serif;
 overflow-x:hidden;
 }
 
-/* NAV */
-nav{
+/* ===== Animated Background ===== */
+body::before{
+content:"";
 position:fixed;
-top:0;
-width:100%;
-padding:15px 20px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(15px);
-z-index:999;
+width:200%;
+height:200%;
+background:radial-gradient(circle at 20% 20%,rgba(255,255,255,0.05),transparent 40%),
+radial-gradient(circle at 80% 80%,rgba(255,255,255,0.05),transparent 40%);
+animation:moveBg 10s linear infinite;
+z-index:-1;
 }
 
-nav h2{
-font-family:'Orbitron';
-letter-spacing:3px;
+@keyframes moveBg{
+0%{transform:translate(0,0);}
+50%{transform:translate(-5%,-5%);}
+100%{transform:translate(0,0);}
 }
 
-/* HERO */
+/* ===== Header ===== */
 header{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+padding:60px 20px;
 text-align:center;
-padding:20px;
 }
 
-.typing{
-font-size:14px;
-letter-spacing:2px;
-opacity:0.8;
-margin-bottom:10px;
-min-height:20px;
-}
-
-.hero-title{
-font-family:'Orbitron';
-font-size:70px;
+h1{
+font-size:38px;
 background:linear-gradient(90deg,#aaa,#fff,#aaa);
 -webkit-background-clip:text;
 color:transparent;
-text-shadow:0 0 30px rgba(255,255,255,0.6);
+animation:shine 3s linear infinite;
 }
 
-.btn{
-margin-top:25px;
-padding:12px 30px;
-border-radius:40px;
-border:1px solid silver;
-background:transparent;
-color:white;
-text-decoration:none;
-transition:0.3s;
+@keyframes shine{
+0%{background-position:-200px;}
+100%{background-position:200px;}
 }
 
-.btn:hover{
-background:white;
-color:black;
-box-shadow:0 0 25px white;
+/* ===== Section ===== */
+.portfolio{
+padding:40px 15px;
+max-width:1000px;
+margin:auto;
 }
 
-/* SECTION */
-section{
-padding:100px 20px;
-text-align:center;
-}
-
-h3{
-font-family:'Orbitron';
-margin-bottom:40px;
-}
-
-/* FILTER BUTTONS */
 .filters{
-margin-bottom:40px;
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
+text-align:center;
+margin-bottom:25px;
 }
 
 .filters button{
-background:transparent;
-border:1px solid silver;
-color:white;
-padding:8px 16px;
+padding:10px 20px;
+margin:5px;
 border-radius:30px;
+border:1px solid #555;
+background:#111;
+color:white;
 cursor:pointer;
 transition:0.3s;
 }
 
-.filters button.active,
 .filters button:hover{
-background:white;
+background:linear-gradient(90deg,#aaa,#fff,#aaa);
 color:black;
 }
 
-/* GALLERY */
+/* ===== Gallery ===== */
+.gallery-wrapper{
+overflow:hidden;
+position:relative;
+}
+
 .gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-gap:20px;
+display:flex;
+transition:transform 0.6s ease;
 }
 
 .card{
-position:relative;
-border-radius:20px;
-overflow:hidden;
-transition:0.4s;
-transform-style:preserve-3d;
+min-width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:15px;
+perspective:1000px;
 }
 
 .card img{
-width:100%;
-aspect-ratio:1/1;
-object-fit:cover;
+width:95%;
 border-radius:20px;
-transition:0.5s;
-}
-
-.card:hover{
-transform:rotateY(8deg) rotateX(8deg) scale(1.05);
-}
-
-.card::before{
-content:'';
-position:absolute;
-inset:0;
-border-radius:20px;
-padding:2px;
-background:linear-gradient(45deg,#fff,#777,#fff);
--webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
--webkit-mask-composite:xor;
-mask-composite:exclude;
-animation:borderGlow 4s linear infinite;
+transition:0.4s;
+box-shadow:0 0 15px rgba(255,255,255,0.2);
+border:2px solid transparent;
+animation:borderGlow 3s infinite alternate;
 }
 
 @keyframes borderGlow{
-0%{filter:hue-rotate(0deg);}
-100%{filter:hue-rotate(360deg);}
+0%{box-shadow:0 0 10px silver;}
+100%{box-shadow:0 0 25px white;}
 }
 
-/* FLOAT WA */
-.float{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-padding:14px 18px;
-border-radius:50px;
-color:white;
-text-decoration:none;
-box-shadow:0 0 20px #25D366;
+.card:hover img{
+transform:rotateY(10deg) scale(1.05);
 }
 
-/* DESKTOP */
-@media(min-width:768px){
-.hero-title{font-size:100px;}
-.gallery{grid-template-columns:repeat(4,1fr);}
+/* ===== Pagination ===== */
+.pagination{
+text-align:center;
+margin-top:20px;
+}
+
+.page{
+display:inline-block;
+margin:5px;
+padding:10px 15px;
+border-radius:50%;
+background:#111;
+border:1px solid #555;
+cursor:pointer;
+transition:0.3s;
+}
+
+.page.active{
+background:linear-gradient(90deg,#aaa,#fff,#aaa);
+color:black;
+box-shadow:0 0 15px white;
+}
+
+/* ===== Footer ===== */
+footer{
+text-align:center;
+padding:30px;
+margin-top:40px;
+background:#111;
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-<h2>NOX CRU</h2>
-</nav>
-
 <header>
-<div class="typing" id="typing"></div>
-<h1 class="hero-title">NOX CRU</h1>
-<a class="btn" href="https://instagram.com/noxcru" target="_blank">
-DM ON INSTAGRAM
-</a>
+<h1>NOX CRU Chrome Text Designs</h1>
+<p>Dark Luxury Futuristic Portfolio</p>
 </header>
 
-<section>
-<h3>Chrome Collection</h3>
+<section class="portfolio">
 
 <div class="filters">
-<button class="active" onclick="filterSelection('all')">All</button>
-<button onclick="filterSelection('chrome')">Chrome</button>
-<button onclick="filterSelection('fire')">Fire</button>
-<button onclick="filterSelection('ice')">Ice</button>
+<button onclick="filterImages('all')">All</button>
+<button onclick="filterImages('chrome')">Chrome</button>
+<button onclick="filterImages('fire')">Fire</button>
+<button onclick="filterImages('ice')">Ice</button>
 </div>
 
-<div class="gallery" id="gallery">
-
-<div class="card chrome"><img src="file_0000000097fc71fa8252d7a992fe6cd7.png"></div>
-<div class="card chrome"><img src="file_00000000a5b87206b96d571906f84d41.png"></div>
-<div class="card fire"><img src="file_00000000a50c71fa8b393e3d16b350b2.png"></div>
-<div class="card ice"><img src="Picsart_26-02-17_22-05-25-752.png"></div>
-<div class="card chrome"><img src="file_00000000ab2071fa84ec9d27e1e6a4f5.png"></div>
-<div class="card fire"><img src="file_00000000ea307209a29ae82c194d611d.png"></div>
-
+<div class="gallery-wrapper">
+<div class="gallery" id="gallery"></div>
 </div>
+
+<div class="pagination" id="pagination"></div>
+
 </section>
 
-<a class="float" href="https://wa.me/917559964232" target="_blank">
-WhatsApp
-</a>
+<footer>
+© 2026 NOX CRU | Ultra Final Boss Mode
+</footer>
 
 <script>
-/* Typing Effect */
-const text="Premium Chrome & 3D Typography Studio";
-let i=0;
-function typing(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
-i++;
-setTimeout(typing,40);
-}}
-typing();
+const images = [
+{src:"Picsart_26-02-17_22-11-50-981.png",category:"chrome"},
+{src:"file_000000000eb47209b39708c9d21f9f04.png",category:"chrome"},
+{src:"Picsart_26-02-17_22-05-25-752.png",category:"fire"},
+{src:"Picsart_26-02-17_22-19-12-252.png",category:"fire"},
+{src:"Picsart_26-02-17_22-13-48-212.png",category:"ice"},
+{src:"Picsart_26-02-17_22-24-33-659.png",category:"ice"},
+{src:"file_000000007e647243a5ecf8bb4c290588.png",category:"chrome"},
+{src:"file_00000000d93c71fa8b8eb1dfbdf435b5.png",category:"fire"},
+{src:"file_00000000a50c71fa8b393e3d16b350b2.png",category:"ice"},
+{src:"file_0000000097fc71fa8252d7a992fe6cd7.png",category:"chrome"},
+{src:"file_00000000ea307209a29ae82c194d611d.png",category:"fire"},
+{src:"file_00000000c53472098fea9588c184e6ed.png",category:"ice"},
+{src:"file_00000000a5b87206b96d571906f84d41.png",category:"chrome"},
+{src:"file_00000000ab2071fa84ec9d27e1e6a4f5.png",category:"fire"},
+];
 
-/* Filter */
-function filterSelection(category){
-let cards=document.querySelectorAll(".card");
-document.querySelectorAll(".filters button").forEach(btn=>btn.classList.remove("active"));
-event.target.classList.add("active");
+let filtered=[...images];
+let currentPage=0;
+const perPage=4;
 
-cards.forEach(card=>{
-if(category==="all"){
-card.style.display="block";
+const gallery=document.getElementById("gallery");
+const pagination=document.getElementById("pagination");
+
+function render(){
+gallery.innerHTML="";
+const start=currentPage*perPage;
+const end=start+perPage;
+const pageItems=filtered.slice(start,end);
+
+pageItems.forEach(item=>{
+gallery.innerHTML+=`
+<div class="card">
+<img src="${item.src}">
+</div>`;
+});
+
+updatePagination();
+}
+
+function updatePagination(){
+pagination.innerHTML="";
+let pages=Math.ceil(filtered.length/perPage);
+for(let i=0;i<pages;i++){
+pagination.innerHTML+=`
+<span class="page ${i===currentPage?'active':''}" onclick="goTo(${i})">${i+1}</span>`;
+}
+}
+
+function goTo(page){
+currentPage=page;
+render();
+}
+
+function filterImages(cat){
+currentPage=0;
+if(cat==="all"){
+filtered=[...images];
 }else{
-card.style.display=card.classList.contains(category)?"block":"none";
+filtered=images.filter(img=>img.category===cat);
+}
+render();
+}
+
+/* Swipe */
+let startX=0;
+gallery.addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX;
+});
+
+gallery.addEventListener("touchend",e=>{
+let endX=e.changedTouches[0].clientX;
+if(startX-endX>50 && currentPage<Math.ceil(filtered.length/perPage)-1){
+currentPage++;render();
+}
+if(endX-startX>50 && currentPage>0){
+currentPage--;render();
 }
 });
-}
+
+render();
 </script>
 
 </body>
