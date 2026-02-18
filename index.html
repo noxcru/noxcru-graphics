@@ -2,72 +2,89 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOX CRU Ultra</title>
+<title>NOXCRU Elite</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 font-family:Arial, sans-serif;
-background:#000;
+background:linear-gradient(to bottom,#000 0%,#000 60%,#001018 100%);
 color:white;
 overflow-x:hidden;
+transition:background 0.3s ease;
 }
 
-/* ===== Animated Background ===== */
-body::before{
-content:"";
-position:fixed;
-width:200%;
-height:200%;
-background:radial-gradient(circle at 20% 20%,rgba(255,255,255,0.05),transparent 40%),
-radial-gradient(circle at 80% 80%,rgba(255,255,255,0.05),transparent 40%);
-animation:moveBg 10s linear infinite;
-z-index:-1;
-}
-
-@keyframes moveBg{
-0%{transform:translate(0,0);}
-50%{transform:translate(-5%,-5%);}
-100%{transform:translate(0,0);}
+/* ===== Scroll Blue Fade ===== */
+body.scrolled{
+background:linear-gradient(to bottom,#000 0%,#000 40%,#002b45 100%);
 }
 
 /* ===== Header ===== */
 header{
-padding:60px 20px;
+padding:80px 20px 60px;
 text-align:center;
+backdrop-filter:blur(8px);
+background:rgba(0,0,0,0.4);
+position:sticky;
+top:0;
+z-index:10;
 }
 
 h1{
-font-size:38px;
-background:linear-gradient(90deg,#aaa,#fff,#aaa);
+font-size:56px;
+font-weight:900;
+letter-spacing:6px;
+background:linear-gradient(120deg,#ffffff,#bde6ff,#ffffff);
 -webkit-background-clip:text;
 color:transparent;
-animation:shine 3s linear infinite;
+text-shadow:0 0 30px rgba(0,200,255,0.4);
+position:relative;
+display:inline-block;
 }
 
-@keyframes shine{
+h1::after{
+content:"";
+position:absolute;
+bottom:-10px;
+left:0;
+width:100%;
+height:3px;
+background:linear-gradient(90deg,transparent,#66ccff,transparent);
+animation:underlineMove 3s infinite linear;
+}
+
+@keyframes underlineMove{
 0%{background-position:-200px;}
 100%{background-position:200px;}
 }
 
-/* ===== Section ===== */
+header p{
+margin-top:20px;
+font-size:14px;
+letter-spacing:4px;
+color:#9fdfff;
+opacity:0.8;
+}
+
+/* ===== Portfolio Section ===== */
 .portfolio{
-padding:40px 15px;
-max-width:1000px;
+padding:50px 15px;
+max-width:1200px;
 margin:auto;
 }
 
+/* ===== Filters ===== */
 .filters{
 text-align:center;
-margin-bottom:25px;
+margin-bottom:30px;
 }
 
 .filters button{
-padding:10px 20px;
-margin:5px;
+padding:10px 22px;
+margin:6px;
 border-radius:30px;
-border:1px solid #555;
+border:1px solid #333;
 background:#111;
 color:white;
 cursor:pointer;
@@ -75,77 +92,74 @@ transition:0.3s;
 }
 
 .filters button:hover{
-background:linear-gradient(90deg,#aaa,#fff,#aaa);
+background:linear-gradient(90deg,#66ccff,#ffffff,#66ccff);
 color:black;
+box-shadow:0 0 15px rgba(0,200,255,0.6);
 }
 
-/* ===== Gallery ===== */
-.gallery-wrapper{
-overflow:hidden;
-position:relative;
-}
-
+/* ===== Gallery Grid ===== */
 .gallery{
-display:flex;
-transition:transform 0.6s ease;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+opacity:1;
+transition:opacity 0.4s ease;
 }
 
 .card{
-min-width:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:15px;
 perspective:1000px;
 }
 
 .card img{
-width:95%;
+width:100%;
 border-radius:20px;
 transition:0.4s;
-box-shadow:0 0 15px rgba(255,255,255,0.2);
-border:2px solid transparent;
-animation:borderGlow 3s infinite alternate;
-}
-
-@keyframes borderGlow{
-0%{box-shadow:0 0 10px silver;}
-100%{box-shadow:0 0 25px white;}
+box-shadow:0 0 20px rgba(0,200,255,0.2);
 }
 
 .card:hover img{
-transform:rotateY(10deg) scale(1.05);
+transform:rotateY(8deg) scale(1.05);
+box-shadow:0 0 30px rgba(0,200,255,0.6);
+}
+
+/* Desktop */
+@media(min-width:900px){
+.gallery{
+grid-template-columns:repeat(4,1fr);
+}
 }
 
 /* ===== Pagination ===== */
 .pagination{
 text-align:center;
-margin-top:20px;
+margin-top:35px;
 }
 
 .page{
 display:inline-block;
-margin:5px;
-padding:10px 15px;
+margin:6px;
+padding:10px 16px;
 border-radius:50%;
 background:#111;
-border:1px solid #555;
+border:1px solid #333;
 cursor:pointer;
 transition:0.3s;
 }
 
 .page.active{
-background:linear-gradient(90deg,#aaa,#fff,#aaa);
+background:linear-gradient(90deg,#66ccff,#ffffff,#66ccff);
 color:black;
-box-shadow:0 0 15px white;
+box-shadow:0 0 18px rgba(0,200,255,0.8);
 }
 
 /* ===== Footer ===== */
 footer{
 text-align:center;
-padding:30px;
-margin-top:40px;
-background:#111;
+padding:40px;
+margin-top:60px;
+background:#050505;
+font-size:14px;
+color:#777;
 }
 </style>
 </head>
@@ -153,8 +167,8 @@ background:#111;
 <body>
 
 <header>
-<h1>NOX CRU Chrome Text Designs</h1>
-<p>Dark Luxury Futuristic Portfolio</p>
+<h1>NOXCRU</h1>
+<p>DARK LUXURY FUTURISTIC PORTFOLIO</p>
 </header>
 
 <section class="portfolio">
@@ -166,16 +180,13 @@ background:#111;
 <button onclick="filterImages('ice')">Ice</button>
 </div>
 
-<div class="gallery-wrapper">
 <div class="gallery" id="gallery"></div>
-</div>
-
 <div class="pagination" id="pagination"></div>
 
 </section>
 
 <footer>
-© 2026 NOX CRU | Ultra Final Boss Mode
+© 2026 NOXCRU | ELITE MODE
 </footer>
 
 <script>
@@ -204,6 +215,8 @@ const gallery=document.getElementById("gallery");
 const pagination=document.getElementById("pagination");
 
 function render(){
+gallery.style.opacity=0;
+setTimeout(()=>{
 gallery.innerHTML="";
 const start=currentPage*perPage;
 const end=start+perPage;
@@ -215,6 +228,8 @@ gallery.innerHTML+=`
 <img src="${item.src}">
 </div>`;
 });
+gallery.style.opacity=1;
+},200);
 
 updatePagination();
 }
@@ -243,19 +258,12 @@ filtered=images.filter(img=>img.category===cat);
 render();
 }
 
-/* Swipe */
-let startX=0;
-gallery.addEventListener("touchstart",e=>{
-startX=e.touches[0].clientX;
-});
-
-gallery.addEventListener("touchend",e=>{
-let endX=e.changedTouches[0].clientX;
-if(startX-endX>50 && currentPage<Math.ceil(filtered.length/perPage)-1){
-currentPage++;render();
-}
-if(endX-startX>50 && currentPage>0){
-currentPage--;render();
+/* Scroll effect */
+window.addEventListener("scroll",()=>{
+if(window.scrollY>150){
+document.body.classList.add("scrolled");
+}else{
+document.body.classList.remove("scrolled");
 }
 });
 
