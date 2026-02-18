@@ -7,11 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 background:#050505;
@@ -30,21 +26,14 @@ justify-content:space-between;
 align-items:center;
 padding:15px 20px;
 background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
+backdrop-filter:blur(15px);
 z-index:999;
 }
 
 nav h2{
-font-family:'Orbitron',sans-serif;
-letter-spacing:2px;
+font-family:'Orbitron';
+letter-spacing:3px;
 font-size:18px;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-font-size:14px;
-opacity:0.8;
 }
 
 /* HERO */
@@ -59,19 +48,18 @@ padding:20px;
 }
 
 .hero-title{
-font-family:'Orbitron',sans-serif;
-font-size:48px;
+font-family:'Orbitron';
+font-size:60px;
 background:linear-gradient(90deg,#aaa,#fff,#aaa);
 -webkit-background-clip:text;
 color:transparent;
-text-shadow:0 0 25px rgba(255,255,255,0.4);
+text-shadow:0 0 30px rgba(255,255,255,0.6);
+animation:shine 3s infinite linear;
 }
 
-.typing{
-margin-top:15px;
-font-size:16px;
-opacity:0.8;
-min-height:24px;
+@keyframes shine{
+0%{background-position:-200px;}
+100%{background-position:200px;}
 }
 
 .btn{
@@ -83,7 +71,6 @@ background:transparent;
 color:white;
 text-decoration:none;
 transition:0.3s;
-display:inline-block;
 }
 
 .btn:hover{
@@ -92,58 +79,101 @@ color:black;
 box-shadow:0 0 25px white;
 }
 
-/* GLASS CARDS */
+/* SECTION */
 section{
-padding:80px 20px;
+padding:100px 20px;
 text-align:center;
 }
 
 h3{
-font-family:'Orbitron',sans-serif;
+font-family:'Orbitron';
 margin-bottom:40px;
-font-size:26px;
 }
 
-.grid{
+/* GALLERY */
+.gallery-wrapper{
+overflow:hidden;
+position:relative;
+}
+
+.gallery-track{
+display:flex;
+transition:transform 0.6s cubic-bezier(.77,0,.18,1);
+}
+
+.page{
+min-width:100%;
 display:grid;
-grid-template-columns:1fr;
+grid-template-columns:1fr 1fr;
 gap:20px;
 }
 
 .card{
+position:relative;
 background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.1);
-backdrop-filter:blur(12px);
-padding:15px;
 border-radius:20px;
-transition:0.3s;
-display:flex;
-justify-content:center;
-align-items:center;
 overflow:hidden;
+padding:10px;
+transition:0.4s;
+border:1px solid rgba(255,255,255,0.1);
 }
 
-
-.card:hover{
-transform:translateY(-8px);
-box-shadow:0 0 30px rgba(255,255,255,0.2);
+.card::before{
+content:'';
+position:absolute;
+inset:0;
+border-radius:20px;
+padding:2px;
+background:linear-gradient(45deg,#fff,#777,#fff);
+-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+animation:borderGlow 3s linear infinite;
 }
 
-.gallery img{
-width:100%;
-height:300px;      /* SAME HEIGHT FOR ALL */
-object-fit:cover;  /* Crops nicely without stretching */
-border-radius:15px;
+@keyframes borderGlow{
+0%{filter:blur(2px);}
+50%{filter:blur(6px);}
+100%{filter:blur(2px);}
 }
 
-.gallery img{
+.card img{
 width:100%;
 aspect-ratio:1/1;
 object-fit:cover;
+border-radius:15px;
+transition:0.5s;
 }
 
+.card:hover{
+transform:scale(1.05);
+}
 
-/* Floating WA */
+/* PAGINATION */
+.pagination{
+margin-top:40px;
+display:flex;
+justify-content:center;
+gap:15px;
+}
+
+.pagination span{
+cursor:pointer;
+padding:10px 18px;
+border-radius:50px;
+border:1px solid silver;
+transition:0.3s;
+font-family:'Orbitron';
+}
+
+.pagination span.active,
+.pagination span:hover{
+background:white;
+color:black;
+box-shadow:0 0 20px white;
+}
+
+/* WHATSAPP FLOAT */
 .float{
 position:fixed;
 bottom:20px;
@@ -157,17 +187,12 @@ font-size:14px;
 box-shadow:0 0 20px #25D366;
 }
 
-/* Desktop Upgrade */
+/* DESKTOP */
 @media(min-width:768px){
-
-.hero-title{
-font-size:80px;
+.page{
+grid-template-columns:repeat(4,1fr);
 }
-
-.grid{
-grid-template-columns:repeat(3,1fr);
-}
-
+.hero-title{font-size:90px;}
 }
 </style>
 </head>
@@ -176,99 +201,75 @@ grid-template-columns:repeat(3,1fr);
 
 <nav>
 <h2>NOX CRU</h2>
-<a href="#pricing">Pricing</a>
 </nav>
 
 <header>
 <h1 class="hero-title">NOX CRU</h1>
-<div class="typing" id="typing"></div>
-
 <a class="btn" href="https://instagram.com/noxcru" target="_blank">
-DM On Instagram
+DM ON INSTAGRAM
 </a>
 </header>
 
 <section>
 <h3>Chrome Collection</h3>
 
-<div class="grid gallery">
-<div class="card">
-<img src="file_0000000097fc71fa8252d7a992fe6cd7.png">
+<div class="gallery-wrapper">
+<div class="gallery-track" id="track">
+
+<!-- PAGE 1 -->
+<div class="page">
+<div class="card"><img src="file_0000000097fc71fa8252d7a992fe6cd7.png"></div>
+<div class="card"><img src="file_00000000a5b87206b96d571906f84d41.png"></div>
+<div class="card"><img src="file_00000000a50c71fa8b393e3d16b350b2.png"></div>
+<div class="card"><img src="Picsart_26-02-17_22-05-25-752.png"></div>
 </div>
 
-<div class="card">
-<img src="file_00000000a5b87206b96d571906f84d41.png">
+<!-- PAGE 2 -->
+<div class="page">
+<div class="card"><img src="file_00000000ab2071fa84ec9d27e1e6a4f5.png"></div>
+<div class="card"><img src="file_00000000ea307209a29ae82c194d611d.png"></div>
 </div>
 
-<div class="card">
-<img src="file_00000000a50c71fa8b393e3d16b350b2.png">
-</div>
-  
-<div class="card">
-<img src="Picsart_26-02-17_22-05-25-752.png">
-</div>
-  
-<div class="card">
-<img src="file_00000000ab2071fa84ec9d27e1e6a4f5.png">
-</div>
-  
-  <div class="card">
-<img src="file_00000000ea307209a29ae82c194d611d.png">
 </div>
 </div>
+
+<div class="pagination">
+<span class="active" onclick="goToPage(0)">1</span>
+<span onclick="goToPage(1)">2</span>
+</div>
+
 </section>
-
-<section id="pricing">
-<h3>Pricing</h3>
-
-<div class="grid">
-<div class="card">
-<h4>Basic</h4>
-<p>Clean Chrome Text</p>
-<p>₹299</p>
-</div>
-
-<div class="card">
-<h4>Premium</h4>
-<p>3D + Lighting Effects</p>
-<p>₹599</p>
-</div>
-
-<div class="card">
-<h4>Ultimate</h4>
-<p>Luxury Custom Identity</p>
-<p>₹999</p>
-</div>
-</div>
-</section>
-
-<section>
-<h3>About</h3>
-<div class="card">
-NOX CRU is a futuristic chrome typography studio crafting powerful digital identities for gamers, brands & creators.
-</div>
-</section>
-
-<footer style="padding:40px;text-align:center;opacity:0.6;">
-© 2026 NOX CRU — Futuristic Chrome Studio
-</footer>
 
 <a class="float" href="https://wa.me/917559964232" target="_blank">
 WhatsApp
 </a>
 
 <script>
-/* Typing Effect */
-const text = "Premium Chrome & 3D Typography Studio";
-let i = 0;
-function typing(){
-if(i < text.length){
-document.getElementById("typing").innerHTML += text.charAt(i);
-i++;
-setTimeout(typing,50);
+const track = document.getElementById('track');
+const pages = document.querySelectorAll('.page');
+const buttons = document.querySelectorAll('.pagination span');
+
+function goToPage(index){
+track.style.transform = `translateX(-${index * 100}%)`;
+buttons.forEach(btn=>btn.classList.remove('active'));
+buttons[index].classList.add('active');
 }
+
+/* Swipe Support */
+let startX = 0;
+track.addEventListener('touchstart', e=>{
+startX = e.touches[0].clientX;
+});
+
+track.addEventListener('touchend', e=>{
+let endX = e.changedTouches[0].clientX;
+if(startX - endX > 50){
+goToPage(1);
 }
-typing();
+if(endX - startX > 50){
+goToPage(0);
+}
+});
 </script>
 
 </body>
