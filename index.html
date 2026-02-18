@@ -24,11 +24,18 @@ background:linear-gradient(to bottom,#000 0%,#000 40%,#002b45 100%);
 header{
 padding:80px 20px 60px;
 text-align:center;
-backdrop-filter:blur(8px);
-background:rgba(0,0,0,0.4);
 position:sticky;
 top:0;
 z-index:10;
+transition:all 0.5s ease;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(10px);
+}
+
+header.scrolled{
+background:rgba(0,0,0,0.9);
+backdrop-filter:blur(0px);
+padding:40px 20px 30px;
 }
 
 h1{
@@ -38,25 +45,13 @@ letter-spacing:6px;
 background:linear-gradient(120deg,#ffffff,#bde6ff,#ffffff);
 -webkit-background-clip:text;
 color:transparent;
-text-shadow:0 0 30px rgba(0,200,255,0.4);
-position:relative;
-display:inline-block;
+text-shadow:0 0 35px rgba(0,200,255,0.5);
+transition:all 0.5s ease;
 }
 
-h1::after{
-content:"";
-position:absolute;
-bottom:-10px;
-left:0;
-width:100%;
-height:3px;
-background:linear-gradient(90deg,transparent,#66ccff,transparent);
-animation:underlineMove 3s infinite linear;
-}
-
-@keyframes underlineMove{
-0%{background-position:-200px;}
-100%{background-position:200px;}
+header.scrolled h1{
+font-size:36px;
+text-shadow:0 0 5px rgba(0,200,255,0.2);
 }
 
 header p{
@@ -65,7 +60,14 @@ font-size:14px;
 letter-spacing:4px;
 color:#9fdfff;
 opacity:0.8;
+transition:all 0.5s ease;
 }
+
+header.scrolled p{
+opacity:0.4;
+letter-spacing:2px;
+}
+
 
 /* ===== Portfolio Section ===== */
 .portfolio{
@@ -260,12 +262,15 @@ render();
 
 /* Scroll effect */
 window.addEventListener("scroll",()=>{
-if(window.scrollY>150){
+if(window.scrollY > 120){
 document.body.classList.add("scrolled");
+document.querySelector("header").classList.add("scrolled");
 }else{
 document.body.classList.remove("scrolled");
+document.querySelector("header").classList.remove("scrolled");
 }
 });
+
 
 render();
 </script>
