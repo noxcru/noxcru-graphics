@@ -19,6 +19,113 @@ transition:background 0.3s ease;
 body.scrolled{
 background:linear-gradient(to bottom,#000 0%,#000 40%,#002b45 100%);
 }
+  
+/* ===== Pricing Section ===== */
+
+.pricing{
+padding:80px 20px;
+max-width:1200px;
+margin:auto;
+text-align:center;
+}
+
+.pricing h2{
+font-size:38px;
+margin-bottom:50px;
+letter-spacing:4px;
+color:#ffffff;
+}
+
+.pricing-grid{
+display:grid;
+grid-template-columns:1fr;
+gap:30px;
+}
+
+.price-card{
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:20px;
+padding:40px 25px;
+transition:0.4s;
+backdrop-filter:blur(8px);
+position:relative;
+}
+
+.price-card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 25px rgba(255,255,255,0.15);
+}
+
+.price-card h3{
+font-size:22px;
+letter-spacing:3px;
+margin-bottom:20px;
+}
+
+.price{
+font-size:40px;
+font-weight:800;
+margin-bottom:25px;
+color:#ffffff;
+}
+
+.price span{
+font-size:14px;
+opacity:0.6;
+}
+
+.features{
+list-style:none;
+margin-bottom:30px;
+}
+
+.features li{
+margin:12px 0;
+opacity:0.85;
+}
+
+.buy-btn{
+display:inline-block;
+padding:12px 28px;
+border-radius:30px;
+background:white;
+color:black;
+font-weight:600;
+text-decoration:none;
+transition:0.3s;
+}
+
+.buy-btn:hover{
+background:#e5e5e5;
+}
+
+/* Highlight Premium */
+.popular{
+border:1px solid white;
+box-shadow:0 0 30px rgba(255,255,255,0.2);
+}
+
+.popular::before{
+content:"MOST POPULAR";
+position:absolute;
+top:-12px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+color:black;
+padding:4px 14px;
+font-size:10px;
+border-radius:20px;
+letter-spacing:2px;
+}
+
+/* Desktop Layout */
+@media(min-width:900px){
+.pricing-grid{
+grid-template-columns:repeat(3,1fr);
+}
+}
 
 /* ===== Header ===== */
 header{
@@ -153,6 +260,50 @@ background:linear-gradient(90deg,#66ccff,#ffffff,#66ccff);
 color:black;
 box-shadow:0 0 18px rgba(0,200,255,0.8);
 }
+<section class="pricing">
+
+<h2>PRICING PLANS</h2>
+
+<div class="pricing-grid">
+
+<div class="price-card">
+<h3>STANDARD</h3>
+<div class="price">₹99 <span>/ project</span></div>
+<ul class="features">
+<li>✔ 1 Custom Chrome Text</li>
+<li>✔ Basic 3D Style</li>
+<li>✔ 2 Revisions</li>
+<li>✔ 3 Day Delivery</li>
+</ul>
+<a href="#" class="buy-btn">ORDER NOW</a>
+</div>
+
+<div class="price-card popular">
+<h3>ELITE</h3>
+<div class="price">₹199 <span>/ project</span></div>
+<ul class="features">
+<li>✔ Advanced 3D Chrome</li>
+<li>✔ Custom Lighting Effects</li>
+<li>✔ 5 Revisions</li>
+<li>✔ 2 Day Delivery</li>
+</ul>
+<a href="#" class="buy-btn">ORDER NOW</a>
+</div>
+
+<div class="price-card">
+<h3>PREMIUM</h3>
+<div class="price">₹229 <span>/ project</span></div>
+<ul class="features">
+<li>✔ Ultra Realistic 3D Design</li>
+<li>✔ Custom Text + Background</li>
+<li>✔ Unlimited Revisions</li>
+<li>✔ 1 Day Priority Delivery</li>
+</ul>
+<a href="#" class="buy-btn">ORDER NOW</a>
+</div>
+
+</div>
+</section>
 
 /* ===== Footer ===== */
 footer{
