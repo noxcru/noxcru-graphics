@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOXCRU Elite</title>
+
+<title>NOXCRU VISUALS</title>
+
+<link rel="icon" type="image/png" href="favicon.png">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -51,8 +54,6 @@ text-shadow:
 0 0 60px #fff;
 }
 }
-
-
 
 header p{
 margin-top:15px;
@@ -108,32 +109,28 @@ grid-template-columns:repeat(4,1fr);
 .card{
 position:relative;
 width:100%;
-aspect-ratio: 1 / 1; /* Perfect square */
+aspect-ratio:1/1;
 overflow:hidden;
 border-radius:18px;
 background:#111;
+cursor:pointer;
 }
 
 .card img{
 width:100%;
 height:100%;
-object-fit:cover;   /* 🔥 Important */
+object-fit:contain;
 object-position:center;
+background:#111;
+padding:8px;
 display:block;
 transition:0.4s ease;
 }
 
-
-.card:hover img{
-transform:scale(1.08);
-box-shadow:0 0 20px #00eaff;
-}
- 
 .card:hover img{
 transform:scale(1.08);
 filter:brightness(1.1);
 }
-
 
 /* Pagination */
 .pagination{
@@ -195,6 +192,55 @@ z-index:10;
 100%{transform:translateY(0);}
 }
 
+/* ===== LIGHTBOX ===== */
+
+.lightbox{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:none;
+align-items:center;
+justify-content:center;
+background:rgba(0,0,0,0.85);
+backdrop-filter:blur(8px);
+z-index:999;
+animation:fadeIn .25s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+.lightbox img{
+max-width:90%;
+max-height:90%;
+border-radius:10px;
+animation:zoom .35s ease;
+}
+
+@keyframes zoom{
+from{
+transform:scale(.7);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.close{
+position:absolute;
+top:25px;
+right:35px;
+font-size:35px;
+cursor:pointer;
+color:white;
+}
+
 footer{
 text-align:center;
 padding:30px;
@@ -242,8 +288,16 @@ DM me on Instagram for pricing →
 © 2026 NOXCRU | ELITE WORKS
 </footer>
 
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+<span class="close" onclick="closeLightbox()">✕</span>
+<img id="lightbox-img">
+</div>
+
 <script>
+
 /* ===== Images ===== */
+
 const images=[
 {src:"Picsart_26-02-17_22-11-50-981.png",category:"chrome"},
 {src:"file_000000000eb47209b39708c9d21f9f04.png",category:"chrome"},
@@ -269,46 +323,76 @@ const gallery=document.getElementById("gallery");
 const pagination=document.getElementById("pagination");
 
 function render(){
+
 gallery.innerHTML="";
 const start=currentPage*perPage;
 const pageItems=filtered.slice(start,start+perPage);
 
 pageItems.forEach(item=>{
+
 gallery.innerHTML+=`
 <div class="card">
-<img src="${item.src}" loading="lazy">
+<img src="${item.src}" loading="lazy" onclick="openLightbox('${item.src}')">
 </div>`;
+
 });
 
 updatePagination();
 }
 
 function updatePagination(){
+
 pagination.innerHTML="";
 let pages=Math.ceil(filtered.length/perPage);
+
 for(let i=0;i<pages;i++){
+
 pagination.innerHTML+=`
 <span class="page ${i===currentPage?'active':''}" onclick="goTo(${i})">${i+1}</span>`;
+
 }
+
 }
 
 function goTo(page){
+
 currentPage=page;
 render();
+
 }
 
 function filterImages(cat,btn){
+
 document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
 btn.classList.add("active");
 
 currentPage=0;
+
 filtered=cat==="all"?[...images]:images.filter(img=>img.category===cat);
+
 render();
+
 }
 
 render();
 
+/* ===== LIGHTBOX ===== */
+
+function openLightbox(src){
+
+document.getElementById("lightbox").style.display="flex";
+document.getElementById("lightbox-img").src=src;
+
+}
+
+function closeLightbox(){
+
+document.getElementById("lightbox").style.display="none";
+
+}
+
 /* ===== Particle Background ===== */
+
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
 
@@ -316,33 +400,48 @@ canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let particles=[];
+
 for(let i=0;i<60;i++){
+
 particles.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
 size:Math.random()*2,
 speed:Math.random()*0.5+0.2
 });
+
 }
 
 function animate(){
+
 ctx.clearRect(0,0,canvas.width,canvas.height);
 ctx.fillStyle="rgba(255,255,255,0.7)";
+
 particles.forEach(p=>{
+
 ctx.beginPath();
 ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
 ctx.fill();
+
 p.y+=p.speed;
+
 if(p.y>canvas.height)p.y=0;
+
 });
+
 requestAnimationFrame(animate);
+
 }
+
 animate();
 
 window.addEventListener("resize",()=>{
+
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
+
 });
+
 </script>
 
 </body>
